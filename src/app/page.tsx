@@ -1,10 +1,10 @@
 "use client"
-import Image from "next/image";
 import { useState } from "react";
-import Modal from "@/app/components/modal"; // Pastikan path sesuai
-import { AppleButton, CreateAccountButtonV2, CreateAccountButton, ForgotPassword, GoogleButton, NextButton, SignInButton, SignUpButton } from "@/app/components/buttons";
+import Modal from "@/app/components/modal";
+import Button from "@/app/components/buttons";
 import Link from "next/link";
 import Line from "./components/line";
+import Logo from "./components/logo";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -26,14 +26,7 @@ export default function Home() {
       <main className="w-full px-12 py-12 md:px-24 lg:flex lg:justify-between">
         {/* Left column */}
         <div className="flex items-center justify-start lg:justify-center lg:w-1/2">
-          <Image
-            src="/x-white.png"
-            alt="X logo"
-            width={250}
-            height={42}
-            className="w-[30px] lg:w-[250px]"
-            priority
-          />
+          <Logo className="w-[30px] lg:w-[250px]" />
         </div>
 
         {/* Right coloumn */}
@@ -44,13 +37,42 @@ export default function Home() {
             <div className="w-9/12">
               <div className="flex flex-col justify-center gap-2.5">
                 <p className="text-3xl font-bold mb-4">Join today.</p>
-                <GoogleButton onClick={() => openModal('googleAccount')} />
-                <AppleButton onClick={() => openModal('appleAccount')} />
+
+                {/* Google button */}
+                <Button
+                  onClick={() => openModal('googleAccount')}
+                  icon="google"
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Sign up with Google
+                </Button>
+
+                {/* Apple button */}
+                <Button
+                  onClick={() => openModal('appleAccount')}
+                  icon="apple"
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Sign up with Apple
+                </Button>
+
               </div>
 
               <Line />
 
-              <CreateAccountButton onClick={() => openModal('createAccount')} />
+              {/* Create account button */}
+              <Button
+                onClick={() => openModal('createAccount')}
+                textColor="text-red"
+                bgColor="bg-customColor"
+                hoverColor="hover:bg-blue-500"
+              >
+                Create account
+              </Button>
 
               <p className="text-gray-500 text-xs mt-2">
                 By signing up, you agree to the{" "}
@@ -70,7 +92,14 @@ export default function Home() {
 
               <div className="mt-12">
                 <p className="text-white text-md font-bold my-6">Already have an account?</p>
-                <SignInButton onClick={() => openModal('signIn')} />
+                <Button
+                  onClick={() => openModal('signIn')}
+                  textColor="text-customColor"
+                  hoverColor="hover:bg-gray-900"
+                  borderColor="border border-gray-600"
+                >
+                  Sign in
+                </Button>
               </div>
             </div>
           </div>
@@ -111,7 +140,16 @@ export default function Home() {
                 />
               </div>
               <div className="mt-12">
-                <NextButton />
+
+                {/* Next button */}
+                <Button
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Next
+                </Button>
+
               </div>
             </div>
           </div>
@@ -126,8 +164,29 @@ export default function Home() {
 
               <div className="flex flex-col justify-center gap-6">
                 <div className="flex flex-col justify-center gap-6">
-                  <GoogleButton onClick={() => openModal('googleAccount')} />
-                  <AppleButton onClick={() => openModal('appleAccount')} />
+
+                  {/* Google button */}
+                  <Button
+                    onClick={() => openModal('googleAccount')}
+                    icon="google"
+                    bgColor="bg-white"
+                    textColor="text-black"
+                    hoverColor="hover:bg-gray-200"
+                  >
+                    Sign up with Google
+                  </Button>
+
+                  {/* Apple button */}
+                  <Button
+                    onClick={() => openModal('appleAccount')}
+                    icon="apple"
+                    bgColor="bg-white"
+                    textColor="text-black"
+                    hoverColor="hover:bg-gray-200"
+                  >
+                    Sign up with Apple
+                  </Button>
+
                 </div>
               </div>
 
@@ -135,7 +194,15 @@ export default function Home() {
 
               <div className="flex flex-col justify-center gap-6">
 
-                <CreateAccountButton onClick={() => openModal('createAccount')} />
+                {/* Create account button */}
+                <Button
+                  onClick={() => openModal('createAccount')}
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Create account
+                </Button>
 
                 <p className="text-gray-500 text-xs">
                   By signing up, you agree to the{" "}
@@ -219,7 +286,16 @@ export default function Home() {
                 </div>
 
                 <div className="mt-8">
-                  <NextButton />
+
+                  {/* Next button */}
+                  <Button
+                    bgColor="bg-white"
+                    textColor="text-black"
+                    hoverColor="hover:bg-gray-200"
+                  >
+                    Next
+                  </Button>
+
                 </div>
 
               </div>
@@ -234,8 +310,29 @@ export default function Home() {
             <div className="w-full md:w-9/12">
               <h2 className="text-2xl font-bold mb-8 mt-12">Sign in to X</h2>
               <div className="flex flex-col justify-center gap-6">
-                <GoogleButton onClick={() => openModal('googleAccount')} />
-                <AppleButton onClick={() => openModal('appleAccount')} />
+
+                {/* Google button */}
+                <Button
+                  onClick={() => openModal('googleAccount')}
+                  icon="google"
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Sign up with Google
+                </Button>
+
+                {/* Apple button */}
+                <Button
+                  onClick={() => openModal('appleAccount')}
+                  icon="apple"
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Sign up with Apple
+                </Button>
+
               </div>
 
               <Line />
@@ -246,8 +343,25 @@ export default function Home() {
                   placeholder="Phone, email, or username"
                   className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
                 />
-                <NextButton />
-                <ForgotPassword onClick={() => openModal('forgotPassword')} />
+
+                {/* Next button */}
+                <Button
+                  bgColor="bg-white"
+                  textColor="text-black"
+                  hoverColor="hover:bg-gray-200"
+                >
+                  Next
+                </Button>
+
+                {/* Forgot password button */}
+                <Button
+                  onClick={() => openModal('forgotPassword')}
+                  bgColor="bg-black"
+                  textColor="text-white"
+                  borderColor="border border-slate-500"
+                >
+                  Forgot password?
+                </Button>
               </div>
 
               <div className="my-12">

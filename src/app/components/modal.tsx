@@ -1,6 +1,6 @@
 import { IoClose } from 'react-icons/io5';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Logo from './logo';
 
 interface ModalProps {
     isOpen: boolean;
@@ -34,13 +34,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 </button>
 
                 <div className="absolute top-4 left-1/2 transform -translate-x-1/2 -translate-y-0">
-                    <Image
-                        src="/x-white.png"
-                        alt="X logo"
-                        width={25}
-                        height={25}
-                        priority
-                    />
+                    <Logo width={25} height={25} />
                 </div>
 
                 <div>
