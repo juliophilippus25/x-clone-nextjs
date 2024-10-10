@@ -39,10 +39,11 @@ export default function Home() {
         {/* Right coloumn */}
         <div className="flex flex-col w-full lg:w-1/2">
           <p className="text-5xl font-bold mb-8 my-12 md:text-7xl">Happening now</p>
+
           <div className="w-full sm:w-9/12 md:w-9/12 lg:w-9/12">
             <div className="w-9/12">
               <div className="flex flex-col justify-center gap-2.5">
-                <p className="text-2xl font-bold mb-4">Join today.</p>
+                <p className="text-3xl font-bold mb-4">Join today.</p>
                 <GoogleButton onClick={() => openModal('googleAccount')} />
                 <AppleButton onClick={() => openModal('appleAccount')} />
               </div>
@@ -53,15 +54,15 @@ export default function Home() {
 
               <p className="text-gray-500 text-xs mt-2">
                 By signing up, you agree to the{" "}
-                <Link href="#" className="text-blue-500 hover:underline">
+                <Link href="#" className="text-customColor hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link href="#" className="text-blue-500 hover:underline">
+                <Link href="#" className="text-customColor hover:underline">
                   Privacy Policy
                 </Link>
                 , including{" "}
-                <Link href="#" className="text-blue-500 hover:underline">
+                <Link href="#" className="text-customColor hover:underline">
                   Cookie Use
                 </Link>
                 .
@@ -187,15 +188,40 @@ export default function Home() {
                   className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
                 />
 
-                <input
+                {/* <input
                   type="password"
                   placeholder="Password"
                   className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                />
+                /> */}
 
-                <div className="mt-4">
-                  <SignUpButton />
+                <div>
+                  <p className="text-white text-md">Date of birth</p>
+                  <p className="text-gray-500 text-sm my-2">
+                    This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.
+                  </p>
+                  <div className="flex flex-row space-x-4">
+                    <input
+                      type="text"
+                      placeholder="Month"
+                      className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Day"
+                      className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Year"
+                      className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                    />
+                  </div>
                 </div>
+
+                <div className="mt-8">
+                  <NextButton />
+                </div>
+
               </div>
 
             </div>

@@ -51,7 +51,7 @@ export const SignInButton: React.FC<ButtonProps> = ({ onClick }) => {
             onClick={onClick}
             className="w-full text-customColor border border-gray-600 bg-black hover:bg-slate-900 font-semibold rounded-full text-md px-5 py-2.5 text-center flex items-center justify-center"
         >
-            Sign In
+            Sign in
         </button>
     );
 };
@@ -87,7 +87,7 @@ export const ForgotPassword: React.FC<ButtonProps> = ({ onClick }) => {
             onClick={onClick}
             className="w-full text-white bg-black border border-slate-500 hover:bg-gray-900 font-semibold rounded-full text-sm px-5 py-2.5 text-center flex items-center justify-center"
         >
-            Forgot Password?
+            Forgot password?
         </button>
     );
 };
@@ -99,7 +99,7 @@ export const SignUpButton: React.FC<ButtonProps> = ({ onClick }) => {
             onClick={onClick}
             className="w-full text-black bg-white hover:bg-gray-200 font-semibold rounded-full text-sm px-5 py-4 text-center flex items-center justify-center"
         >
-            Sign Up
+            Sign up
         </button>
     );
 };
