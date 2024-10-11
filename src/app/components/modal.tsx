@@ -1,7 +1,6 @@
 import { IoClose } from 'react-icons/io5';
 import React, { useEffect, useState } from 'react';
-import Logo from './logo';
-
+import Logo from '@/app/components/logo';
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;

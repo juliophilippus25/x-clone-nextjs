@@ -1,10 +1,10 @@
 "use client"
 import { useState } from "react";
 import Modal from "@/app/components/modal";
-import Button from "@/app/components/buttons";
+import Button from "@/app/components/Buttons";
 import Link from "next/link";
-import Line from "./components/line";
-import Logo from "./components/logo";
+import Line from "@/app/components/line";
+import Logo from "@/app/components/logo";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
