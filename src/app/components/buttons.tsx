@@ -40,7 +40,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
             type={type}
             onClick={onClick}
-            className={`w-full ${textColor} ${bgColor} ${hoverColor} ${borderColor} font-semibold rounded-full text-sm px-5 py-2.5 text-center flex items-center justify-center ${customClass}`}
+            className={`w-full ${textColor} ${bgColor} ${hoverColor} ${borderColor} font-semibold rounded-full text-sm text-center flex items-center justify-center ${customClass}`}
         >
             {icon && renderIcon()}
             {children}

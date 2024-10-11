@@ -21,8 +21,8 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="text-gray-500 text-sm mt-16 mb-4">
-            <div className="flex flex-wrap px-5 justify-center gap-3">
+        <footer id="footer" className="text-gray-500 text-sm mt-16 mb-4">
+            <div className="flex flex-wrap px-5 justify-center gap-3 text-xs">
                 {links.map((link, index) => (
                     <Link key={index} href={link.href} className="hover:underline">
                         {link.label}

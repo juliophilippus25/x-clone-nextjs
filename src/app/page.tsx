@@ -1,10 +1,10 @@
 "use client"
 import { useState } from "react";
-import Modal from "@/app/components/modal";
+import Modal from "@/app/components/Modal";
 import Button from "@/app/components/Buttons";
 import Link from "next/link";
-import Line from "@/app/components/line";
-import Logo from "@/app/components/logo";
+import Line from "@/app/components/Line";
+import Logo from "@/app/components/Logo";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -45,6 +45,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Sign up with Google
                 </Button>
@@ -56,6 +57,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Sign up with Apple
                 </Button>
@@ -67,9 +69,10 @@ export default function Home() {
               {/* Create account button */}
               <Button
                 onClick={() => openModal('createAccount')}
-                textColor="text-red"
+                textColor="text-white"
                 bgColor="bg-customColor"
                 hoverColor="hover:bg-blue-500"
+                customClass="px-5 py-2.5"
               >
                 Create account
               </Button>
@@ -97,6 +100,7 @@ export default function Home() {
                   textColor="text-customColor"
                   hoverColor="hover:bg-gray-900"
                   borderColor="border border-gray-600"
+                  customClass="px-5 py-2.5"
                 >
                   Sign in
                 </Button>
@@ -146,6 +150,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Next
                 </Button>
@@ -172,6 +177,7 @@ export default function Home() {
                     bgColor="bg-white"
                     textColor="text-black"
                     hoverColor="hover:bg-gray-200"
+                    customClass="px-5 py-2.5"
                   >
                     Sign up with Google
                   </Button>
@@ -183,6 +189,7 @@ export default function Home() {
                     bgColor="bg-white"
                     textColor="text-black"
                     hoverColor="hover:bg-gray-200"
+                    customClass="px-5 py-2.5"
                   >
                     Sign up with Apple
                   </Button>
@@ -200,6 +207,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Create account
                 </Button>
@@ -263,7 +271,7 @@ export default function Home() {
 
                 <div>
                   <p className="text-white text-md">Date of birth</p>
-                  <p className="text-gray-500 text-sm my-2">
+                  <p className="text-gray-500 text-xs my-2">
                     This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.
                   </p>
                   <div className="flex flex-row space-x-4">
@@ -292,6 +300,7 @@ export default function Home() {
                     bgColor="bg-white"
                     textColor="text-black"
                     hoverColor="hover:bg-gray-200"
+                    customClass="px-5 py-2.5"
                   >
                     Next
                   </Button>
@@ -318,6 +327,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Sign up with Google
                 </Button>
@@ -329,6 +339,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Sign up with Apple
                 </Button>
@@ -349,6 +360,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
+                  customClass="px-5 py-2.5"
                 >
                   Next
                 </Button>
@@ -359,6 +371,7 @@ export default function Home() {
                   bgColor="bg-black"
                   textColor="text-white"
                   borderColor="border border-slate-500"
+                  customClass="px-5 py-2.5"
                 >
                   Forgot password?
                 </Button>

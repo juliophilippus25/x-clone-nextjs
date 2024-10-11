@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/app/components/Footer";
 import { Suspense } from "react";
-import Loading from "@/app/components/loading";
+import Loading from "@/app/components/Loading";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,13 +25,12 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  showFooter?: boolean;
 }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} flex flex-col min-h-screen`}>
-        <Suspense fallback={<Loading />}>
-          {children}
-        </Suspense>
+        {children}
         <Footer />
       </body>
     </html>

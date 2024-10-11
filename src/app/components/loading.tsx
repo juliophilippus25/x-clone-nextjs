@@ -1,4 +1,4 @@
-import Logo from "@/app/components/logo";
+import Logo from "@/app/components/Logo";
 
 export default function Loading() {
     return (
