@@ -72,7 +72,7 @@ export default function Home() {
                 textColor="text-white"
                 bgColor="bg-customColor"
                 hoverColor="hover:bg-blue-500"
-                customClass="px-5 py-2.5"
+                customClass="px-5 py-2.5 w-full"
               >
                 Create account
               </Button>
@@ -100,7 +100,7 @@ export default function Home() {
                   textColor="text-customColor"
                   hoverColor="hover:bg-gray-900"
                   borderColor="border border-gray-600"
-                  customClass="px-5 py-2.5"
+                  customClass="px-5 py-2.5 w-full"
                 >
                   Sign in
                 </Button>
@@ -150,7 +150,7 @@ export default function Home() {
                   bgColor="bg-white"
                   textColor="text-black"
                   hoverColor="hover:bg-gray-200"
-                  customClass="px-5 py-2.5"
+                  customClass="px-5 py-2.5 w-full"
                 >
                   Next
                 </Button>
@@ -300,7 +300,7 @@ export default function Home() {
                     bgColor="bg-white"
                     textColor="text-black"
                     hoverColor="hover:bg-gray-200"
-                    customClass="px-5 py-2.5"
+                    customClass="px-5 py-2.5 w-full"
                   >
                     Next
                   </Button>

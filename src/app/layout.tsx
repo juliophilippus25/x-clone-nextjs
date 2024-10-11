@@ -1,9 +1,8 @@
+// RootLayout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/app/components/Footer";
-import { Suspense } from "react";
-import Loading from "@/app/components/Loading";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,6 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  showFooter = true,
 }: Readonly<{
   children: React.ReactNode;
   showFooter?: boolean;
@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} flex flex-col min-h-screen`}>
         {children}
-        <Footer />
+        {showFooter && <Footer />}
       </body>
     </html>
   );

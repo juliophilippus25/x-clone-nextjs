@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Sidebar from "@/app/components/home/Sidebar";
 import Trends from "@/app/components/home/Trends";
 import Tweets from "@/app/components/home/Tweets";
@@ -6,12 +6,13 @@ import { useEffect } from "react";
 import Button from "../components/Buttons";
 import Navbar from "../components/home/Navbar";
 import Image from "next/image";
+import RootLayout from "../layout";
 
 export default function HomePage() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            var footer = document.getElementById('footer');
+            const footer = document.getElementById('footer');
             if (footer) {
                 footer.style.display = 'none';
             }
@@ -43,7 +44,7 @@ export default function HomePage() {
                                 textColor="text-white"
                                 bgColor="bg-customColor"
                                 hoverColor="hover:bg-blue-500"
-                                customClass="p=2 py-2 w-1/6 lg:w-[80px] mt-2 text-xs lg:text-sm"
+                                customClass="p=2 py-2 w-1/5 mt-2 text-sm"
                             >
                                 Post
                             </Button>
@@ -51,7 +52,7 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                <Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets />
+                <Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets />
             </div>
 
             {/* Right column */}

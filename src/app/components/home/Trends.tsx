@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Footer from "../Footer";
+import WhoToFollow from "@/app/components/home/WhoToFollow";
 
 export default function Trends() {
     return (
-        <div className="hidden lg:block w-2/5 p-4 ml-4">
+        <div className="hidden lg:block w-2/5 p-4 ml-4 sticky top-0 h-auto">
             <div className="border border-gray-800 p-4 rounded-lg">
                 <h2 className="text-lg font-bold">Trends for you</h2>
                 <div className="py-2">
@@ -44,8 +45,7 @@ export default function Trends() {
                     Show more
                 </Link>
             </div>
-
-            <Footer />
+            <WhoToFollow />
         </div>
     );
 }
