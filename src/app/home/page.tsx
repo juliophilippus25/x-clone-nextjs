@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import Button from "../components/Buttons";
 import Navbar from "../components/home/Navbar";
 import Image from "next/image";
-import RootLayout from "../layout";
 
 export default function HomePage() {
 

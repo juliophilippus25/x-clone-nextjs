@@ -5,7 +5,7 @@ import Button from "@/app/components/Buttons";
 import Link from "next/link";
 import Line from "@/app/components/Line";
 import Logo from "@/app/components/Logo";
-import { loginUser, registerUser } from "./lib/action";
+import { loginUser, registerUser } from "./lib/actions";
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -53,7 +53,8 @@ export default function Home() {
 
     const isLoggedIn = await loginUser(email, password);
     if (isLoggedIn) {
-      document.cookie = `session=${JSON.stringify({ isLoggedIn: true, email })}; path=/;`;
+      const session = JSON.parse(localStorage.getItem("session") || "{}");
+      document.cookie = `session=${JSON.stringify({ isLoggedIn: true, userId: session.userId })}; path=/;`;
       router.push('/home'); // redirect to home page
     } else {
       alert("Invalid email or password");
@@ -67,6 +68,7 @@ export default function Home() {
       router.push('/home'); // redirect to home page
     }
   }, [router]);
+
 
 
   return (

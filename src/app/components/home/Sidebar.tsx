@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Logo from "@/app/components/Logo";
 import Link from "next/link";
 import { IoIosHome, IoIosSearch, IoIosNotifications, IoIosMail, IoIosBook, IoIosPeople, IoIosStar, IoIosCheckmarkCircle, IoIosMore, IoIosPerson, IoIosAdd } from "react-icons/io";
 import Button from "@/app/components/Buttons";
 import Image from "next/image";
+import { User, getUserById } from '@/app/lib/data';
 
 const navItems = [
     { label: "", href: "/home", icon: <Logo width={26} height={26} className="p-1" /> },
@@ -32,17 +33,45 @@ export default function Sidebar() {
     const handleLogout = (e: React.MouseEvent) => {
         e.stopPropagation();
 
-        // delete cookie
-        const expireDate = new Date();
-        expireDate.setTime(expireDate.getTime() + (1 * 60 * 60 * 1000)); // 1 hour
+        // // delete cookie
+        // const expireDate = new Date();
+        // expireDate.setTime(expireDate.getTime() + (1 * 60 * 60 * 1000)); // 1 hour
 
-        // Set cookie expires in 1 hour
-        document.cookie = `session=; path=/; expires=${expireDate.toUTCString()};`;
+        // // Set cookie expires in 1 hour
+        // document.cookie = `session=; path=/; expires=${expireDate.toUTCString()};`;
+
+        // alert("Logout successful!");
+        // localStorage.removeItem("session"); // delete session from localStorage
+        // router.push('/'); // redirect to landing page
+
+        // delete session from cookie
+        document.cookie = "session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+
+        // delete session from localStorage
+        localStorage.removeItem("session");
 
         alert("Logout successful!");
-        localStorage.removeItem("session"); // delete session from localStorage
         router.push('/'); // redirect to landing page
+
     };
+
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        // get session from cookie
+        const session = document.cookie.split('; ').find(row => row.startsWith('session='));
+        if (session) {
+            const sessionData = JSON.parse(session.split('=')[1]);
+            const userId = sessionData.userId; // get userId from session
+            if (userId) {
+                const fetchedUser = getUserById(userId); // get user by id
+                setUser(fetchedUser || null);
+            }
+        }
+    }, []);
+
+    console.log(user);
+
 
     return (
         <div className="w-2/8 sticky top-0 h-screen lg:w-4/12 p-2">
@@ -75,8 +104,8 @@ export default function Sidebar() {
                         <div className="flex items-center">
                             <Image src="/avatar.jpg" alt="Avatar" width={40} height={40} className="rounded-full w-10 h-10" />
                             <div className="ml-2 flex flex-col justify-center">
-                                <p className="text-white hidden lg:block">Julio Philippus</p>
-                                <p className="text-gray-600 hidden lg:block">@julzybaee</p>
+                                <p className="text-white hidden lg:block">{user?.name}</p>
+                                <p className="text-gray-600 hidden lg:block">@{user?.username}</p>
                             </div>
                         </div>
                     </div>

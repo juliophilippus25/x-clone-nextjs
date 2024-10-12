@@ -1,5 +1,6 @@
 import { hashSync } from "bcrypt-ts";
 import { compare } from "bcrypt-ts";
+import { v4 as uuidv4 } from "uuid";
 
 // Register user
 export const registerUser = async (
@@ -8,19 +9,21 @@ export const registerUser = async (
   email: string,
   password: string
 ) => {
-  const user = { name, username, email, password };
+  // Generate a unique userId using uuid
+  const userId = uuidv4();
+  const user = { id: userId, name, username, email, password };
 
-  // encrypt password
+  // Encrypt password
   const hashedPassword = await hashSync(password, 10);
   user.password = hashedPassword;
 
-  // get users from localStorage
+  // Get users from localStorage
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
-  // add new user to array
+  // Add new user to array
   existingUsers.push(user);
 
-  // store users in localStorage
+  // Store users in localStorage
   localStorage.setItem("users", JSON.stringify(existingUsers));
 };
 
@@ -29,25 +32,25 @@ export const loginUser = async (
   email: string,
   password: string
 ): Promise<boolean> => {
-  // get users from localStorage
+  // Get users from localStorage
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
-  // find user with email
+  // Find user with email
   const user = existingUsers.find(
     (user: { email: string }) => user.email === email
   );
 
   if (user) {
-    // compare password with hashed password
+    // Compare password with hashed password
     const isMatch = await compare(password, user.password);
     if (isMatch) {
       localStorage.setItem(
         "session",
-        JSON.stringify({ isLoggedIn: true, email })
+        JSON.stringify({ isLoggedIn: true, userId: user.id }) // Store userId in session
       );
-      return true; // successful login
+      return true; // Successful login
     }
   }
 
-  return false; // failed login
+  return false; // Failed login
 };
