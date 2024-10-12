@@ -10,17 +10,17 @@ export const registerUser = async (
 ) => {
   const user = { name, username, email, password };
 
-  // Mengenkripsi password
+  // encrypt password
   const hashedPassword = await hashSync(password, 10);
   user.password = hashedPassword;
 
-  // Ambil data pengguna yang sudah ada dari localStorage
+  // get users from localStorage
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
-  // Tambahkan user baru ke array
+  // add new user to array
   existingUsers.push(user);
 
-  // Simpan kembali array pengguna ke localStorage
+  // store users in localStorage
   localStorage.setItem("users", JSON.stringify(existingUsers));
 };
 
@@ -29,25 +29,25 @@ export const loginUser = async (
   email: string,
   password: string
 ): Promise<boolean> => {
-  // Ambil semua pengguna dari localStorage
+  // get users from localStorage
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
-  // Temukan pengguna berdasarkan email
+  // find user with email
   const user = existingUsers.find(
     (user: { email: string }) => user.email === email
   );
 
   if (user) {
-    // Bandingkan password yang dimasukkan dengan yang terenkripsi
+    // compare password with hashed password
     const isMatch = await compare(password, user.password);
     if (isMatch) {
       localStorage.setItem(
         "session",
         JSON.stringify({ isLoggedIn: true, email })
       );
-      return true; // Login sukses
+      return true; // successful login
     }
   }
 
-  return false; // Login gagal
+  return false; // failed login
 };

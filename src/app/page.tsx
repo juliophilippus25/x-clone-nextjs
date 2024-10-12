@@ -7,6 +7,7 @@ import Line from "@/app/components/Line";
 import Logo from "@/app/components/Logo";
 import { loginUser, registerUser } from "./lib/action";
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -50,16 +51,22 @@ export default function Home() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Panggil fungsi untuk login dan tunggu hasilnya
     const isLoggedIn = await loginUser(email, password);
     if (isLoggedIn) {
-      alert('Login successful!');
-      router.push('/home');
+      document.cookie = `session=${JSON.stringify({ isLoggedIn: true, email })}; path=/;`;
+      router.push('/home'); // redirect to home page
     } else {
-      alert('Invalid email or password');
+      alert("Invalid email or password");
     }
   };
 
+  // Redirect to home page if session exists
+  useEffect(() => {
+    const session = document.cookie.split('; ').find(row => row.startsWith('session='));
+    if (session) {
+      router.push('/home'); // redirect to home page
+    }
+  }, [router]);
 
 
   return (

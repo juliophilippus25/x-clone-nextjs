@@ -28,11 +28,20 @@ export default function Sidebar() {
         setDropdownOpen((prev) => !prev);
     };
 
+    // Logout
     const handleLogout = (e: React.MouseEvent) => {
         e.stopPropagation();
+
+        // delete cookie
+        const expireDate = new Date();
+        expireDate.setTime(expireDate.getTime() + (1 * 60 * 60 * 1000)); // 1 hour
+
+        // Set cookie expires in 1 hour
+        document.cookie = `session=; path=/; expires=${expireDate.toUTCString()};`;
+
         alert("Logout successful!");
-        localStorage.removeItem("session");
-        router.push('/');
+        localStorage.removeItem("session"); // delete session from localStorage
+        router.push('/'); // redirect to landing page
     };
 
     return (
