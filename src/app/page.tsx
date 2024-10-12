@@ -5,6 +5,8 @@ import Button from "@/app/components/Buttons";
 import Link from "next/link";
 import Line from "@/app/components/Line";
 import Logo from "@/app/components/Logo";
+import { loginUser, registerUser } from "./lib/action";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -19,6 +21,45 @@ export default function Home() {
     setModalOpen(false);
     setModalType(null);
   };
+
+  // State register
+  const [name, setName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const router = useRouter();
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // call function for register
+    alert('Register successful!');
+    registerUser(name, username, email, password);
+
+    // reset form
+    setName('');
+    setUsername('');
+    setEmail('');
+    setPassword('');
+
+    // close modal
+    closeModal();
+
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Panggil fungsi untuk login dan tunggu hasilnya
+    const isLoggedIn = await loginUser(email, password);
+    if (isLoggedIn) {
+      alert('Login successful!');
+      router.push('/home');
+    } else {
+      alert('Invalid email or password');
+    }
+  };
+
 
 
   return (
@@ -250,65 +291,82 @@ export default function Home() {
             <div className="w-full md:w-9/12">
               <h2 className="text-2xl font-bold mb-8 mt-12">Create your account</h2>
 
-              <div className="flex flex-col justify-center gap-6">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                />
+              <form onSubmit={handleRegister}>
+                <div className="flex flex-col justify-center gap-6">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                  />
 
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                />
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                  />
 
-                {/* <input
-                  type="password"
-                  placeholder="Password"
-                  className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                /> */}
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                  />
 
-                <div>
-                  <p className="text-white text-md">Date of birth</p>
-                  <p className="text-gray-500 text-xs my-2">
-                    This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.
-                  </p>
-                  <div className="flex flex-row space-x-4">
-                    <input
-                      type="text"
-                      placeholder="Month"
-                      className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Day"
-                      className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Year"
-                      className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                    />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                  />
+
+                  {/* <div>
+                    <p className="text-white text-md">Date of birth</p>
+                    <p className="text-gray-500 text-xs my-2">
+                      This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.
+                    </p>
+                    <div className="flex flex-row space-x-4">
+                      <input
+                        type="text"
+                        placeholder="Month"
+                        className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Day"
+                        className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Year"
+                        className="w-1/3 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                      />
+
+                    </div>
+                  </div> */}
+
+                  <div className="mt-8">
+
+                    {/* Next button */}
+                    <Button
+                      type="submit"
+                      bgColor="bg-white"
+                      textColor="text-black"
+                      hoverColor="hover:bg-gray-200"
+                      customClass="px-5 py-2.5 w-full"
+                    >
+                      Next
+                    </Button>
+
                   </div>
-                </div>
-
-                <div className="mt-8">
-
-                  {/* Next button */}
-                  <Button
-                    bgColor="bg-white"
-                    textColor="text-black"
-                    hoverColor="hover:bg-gray-200"
-                    customClass="px-5 py-2.5 w-full"
-                  >
-                    Next
-                  </Button>
 
                 </div>
-
-              </div>
-
+              </form>
             </div>
           </div>
         )}
@@ -349,21 +407,34 @@ export default function Home() {
               <Line />
 
               <div className="flex flex-col justify-center gap-6">
-                <input
-                  type="text"
-                  placeholder="Phone, email, or username"
-                  className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
-                />
+                <form onSubmit={handleLogin}>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                  />
 
-                {/* Next button */}
-                <Button
-                  bgColor="bg-white"
-                  textColor="text-black"
-                  hoverColor="hover:bg-gray-200"
-                  customClass="px-5 py-2.5"
-                >
-                  Next
-                </Button>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full my-4 p-4 border bg-black border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-customColor"
+                  />
+
+                  {/* Next button */}
+                  <Button
+                    type="submit"
+                    bgColor="bg-white"
+                    textColor="text-black"
+                    hoverColor="hover:bg-gray-200"
+                    customClass="px-5 py-2.5 w-full"
+                  >
+                    Next
+                  </Button>
+                </form>
 
                 {/* Forgot password button */}
                 <Button
@@ -377,7 +448,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="my-12">
+              <div className="mt-4">
                 <p className="text-gray-500">
                   Don&apos;t have an account?{" "}
                   <button

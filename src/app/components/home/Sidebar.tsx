@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Logo from "@/app/components/Logo";
 import Link from "next/link";
 import { IoIosHome, IoIosSearch, IoIosNotifications, IoIosMail, IoIosBook, IoIosPeople, IoIosStar, IoIosCheckmarkCircle, IoIosMore, IoIosPerson, IoIosAdd } from "react-icons/io";
@@ -18,8 +20,21 @@ const navItems = [
     { label: "More", href: "/more", icon: <IoIosMore size={26} /> },
 ];
 
-
 export default function Sidebar() {
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const router = useRouter();
+
+    const toggleDropdown = () => {
+        setDropdownOpen((prev) => !prev);
+    };
+
+    const handleLogout = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        alert("Logout successful!");
+        localStorage.removeItem("session");
+        router.push('/');
+    };
+
     return (
         <div className="w-2/8 sticky top-0 h-screen lg:w-4/12 p-2">
             <ul className="h-full flex flex-col justify-between items-center lg:items-start">
@@ -43,18 +58,32 @@ export default function Sidebar() {
                     </span>
                 </Button>
 
-                <div className="flex items-center justify-between mt-8 p-2 rounded-full w-full cursor-pointer hover:bg-gray-900 transition-all">
-                    <div className="flex items-center">
-                        <Image src="/avatar.jpg" alt="Avatar" width={10} height={10} className="rounded-full w-10 h-10" />
-                        <div className="ml-2 flex flex-col justify-center">
-                            <p className="text-white hidden lg:block">Julio Philippus</p>
-                            <p className="text-gray-600 hidden lg:block">@julzybaee</p>
+                <div
+                    className="flex items-center justify-between mt-8 p-2 rounded-full w-full cursor-pointer hover:bg-gray-900 transition-all"
+                    onClick={toggleDropdown}
+                >
+                    <div className="relative">
+                        <div className="flex items-center">
+                            <Image src="/avatar.jpg" alt="Avatar" width={40} height={40} className="rounded-full w-10 h-10" />
+                            <div className="ml-2 flex flex-col justify-center">
+                                <p className="text-white hidden lg:block">Julio Philippus</p>
+                                <p className="text-gray-600 hidden lg:block">@julzybaee</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                    {isDropdownOpen && (
+                        <div className="absolute -right-22 bottom-16 w-32  lg:right-8 mt-2 lg:w-60 bg-gray-900 rounded-full shadow-lg z-10">
+                            <button
+                                className="block w-full text-center px-4 py-2 text-white"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    )}
+                </div>
             </ul>
         </div>
-
     );
 }
