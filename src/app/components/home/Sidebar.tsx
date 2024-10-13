@@ -17,7 +17,7 @@ const navItems = [
     { label: "Communities", href: "/communities", icon: <IoIosPeople size={26} /> },
     { label: "Premium", href: "/premium", icon: <IoIosStar size={26} /> },
     { label: "Verified Orgs", href: "/verified-orgs", icon: <IoIosCheckmarkCircle size={26} /> },
-    { label: "Profile", href: "/profile", icon: <IoIosPerson size={26} /> },
+    { label: "Profile", href: "", icon: <IoIosPerson size={26} /> },
     { label: "More", href: "/more", icon: <IoIosMore size={26} /> },
 ];
 
@@ -70,15 +70,12 @@ export default function Sidebar() {
         }
     }, []);
 
-    console.log(user);
-
-
     return (
         <div className="w-2/8 sticky top-0 h-screen lg:w-4/12 p-2">
             <ul className="h-full flex flex-col justify-between items-center lg:items-start">
                 {navItems.map((item) => (
                     <li key={item.label} className="flex hover:bg-gray-900 hover:rounded-full p-2 transition-all">
-                        <Link href={item.href} className="flex">
+                        <Link href={item.label === 'Profile' ? `${user?.username}` : item.href} className="flex">
                             <div className="flex-shrink-0">{item.icon}</div>
                             <span className="ml-2 hidden lg:block">{item.label}</span>
                         </Link>
@@ -122,6 +119,6 @@ export default function Sidebar() {
                     )}
                 </div>
             </ul>
-        </div>
+        </div >
     );
 }

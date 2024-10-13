@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Button from "../components/Buttons";
 import Navbar from "../components/home/Navbar";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
 
@@ -25,7 +26,13 @@ export default function HomePage() {
 
             {/* Center column */}
             <div className="w-full md:w-3/4 lg:w-8/12 border border-gray-800">
-                <Navbar />
+                <Navbar>
+                    <h2 className="text-xl font-bold text-white p-4 md:hidden">Home</h2>
+                    <nav className="flex items-center justify-between">
+                        <Link href="#" className="text-white font-bold block w-full text-center hover:bg-gray-900 py-2">For you</Link>
+                        <Link href="#" className="text-white font-bold block w-full text-center hover:bg-gray-900 py-2">Following</Link>
+                    </nav>
+                </Navbar>
                 <div className="p-4 rounded shadow mb-4 flex justify-center">
                     <div className="flex-shrink-0">
                         <Image src="/avatar.jpg" alt="Avatar" width={50} height={50} className="w-10 h-10 rounded-full" />
@@ -59,4 +66,4 @@ export default function HomePage() {
         </main>
 
     )
-}
+}   

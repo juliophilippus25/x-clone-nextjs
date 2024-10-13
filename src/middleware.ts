@@ -1,19 +1,18 @@
 import { NextResponse } from "next/server";
 
 export function middleware(req: any) {
-  const session = req.cookies.get("session"); // atau menggunakan localStorage di klien
+  const session = req.cookies.get("session"); // get session
 
-  // Periksa apakah session ada
+  //check if session exists
   if (!session) {
-    // Jika tidak ada session, redirect ke halaman login
+    // if session doesn't exist, redirect to landing page
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // Jika session ada, lanjutkan ke halaman yang diminta
+  // if session exists, continue to protected page
   return NextResponse.next();
 }
 
-// Tentukan halaman yang ingin dilindungi
 export const config = {
-  matcher: ["/home"], // Atur agar middleware ini hanya berlaku di '/home'
+  matcher: ["/home"], // protected page
 };

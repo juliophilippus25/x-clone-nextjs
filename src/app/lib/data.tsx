@@ -23,3 +23,8 @@ export const getUserById = (id: string): User | undefined => {
     const users = getUsersFromLocalStorage();
     return users.find(user => user.id === id);
 };
+
+export const getProfile = (username: any): User | undefined => {
+    const users = getUsersFromLocalStorage();
+    return users.find(user => user.username === username);
+};
