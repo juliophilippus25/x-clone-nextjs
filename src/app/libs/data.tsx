@@ -46,3 +46,14 @@ export const getTweets = (): Tweet[] => {
     }
     return [];
 };
+
+// get tweets by username
+export const getTweetsByUsername = (username: string): Tweet[] => {
+    const user = getProfile(username);
+    if (!user) {
+        return []; // Return an empty array if user not found
+    }
+
+    const tweets = getTweets();
+    return tweets.filter(tweet => tweet.userId === user.id); // Filter tweets by userId
+};

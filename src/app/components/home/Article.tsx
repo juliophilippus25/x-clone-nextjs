@@ -3,6 +3,7 @@ import { getUserById } from '@/app/libs/data';
 import { Tweet } from '@/app/libs/data';
 import Image from 'next/image';
 import { FaRegComment, FaRetweet, FaRegHeart, FaChartBar, FaShareAlt, FaBookmark } from 'react-icons/fa';
+import { formatUsername } from '@/app/libs/utils';
 
 interface ArticleProps {
     data: news | Tweet; // Allow either type
@@ -13,6 +14,8 @@ const Article = ({ data }: ArticleProps) => {
     let username = 'unknown'; // Default username
     let name = 'Unknown User'; // Default name
     let urlToImage = isTweet ? '' : data.urlToImage; // Set URL based on type
+
+    const formattedUsername = formatUsername(username);
 
     if (isTweet) {
         // Fetch the user data for the tweet
@@ -37,8 +40,8 @@ const Article = ({ data }: ArticleProps) => {
             </div>
             <div className="flex-grow ml-2">
                 <p className="text-white">
-                    {name}
-                    <span className="text-gray-500">@{username}</span>
+                    {name}&nbsp;
+                    <span className="text-gray-500">@{formatUsername(username)}</span>
                 </p>
                 <div className="mt-2">
                     <p className="text-gray-300">{isTweet ? data.tweet : data.title || ''}</p>

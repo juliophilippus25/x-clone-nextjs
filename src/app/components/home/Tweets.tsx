@@ -16,6 +16,7 @@ const Tweets = () => {
 
     // Use SWR to fetch articles from the API
     const { data: articles, error: apiError } = useSWR('news', fetcher);
+    console.log(articles);
 
     // Handle loading state
     if (!articles) return <div>Loading...</div>;
