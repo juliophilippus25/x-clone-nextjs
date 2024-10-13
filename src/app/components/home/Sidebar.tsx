@@ -89,7 +89,7 @@ export default function Sidebar() {
                 >
                     <span className="hidden md:inline">Post</span>
                     <span className="inline md:hidden">
-                        <IoIosAdd size={26} />
+                        <IoIosAdd size={16} />
                     </span>
                 </Button>
 
