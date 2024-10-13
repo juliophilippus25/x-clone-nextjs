@@ -1,14 +1,34 @@
 import { news } from '@/app/types';
+import { getUserById } from '@/app/libs/data'; // Import the function to get user data
+import { Tweet } from '@/app/libs/data'; // Import both types
 import Image from 'next/image';
 import { FaRegComment, FaRetweet, FaRegHeart, FaChartBar, FaShareAlt, FaBookmark } from 'react-icons/fa';
 
-const Article = ({ data }: { data: news }) => {
+interface ArticleProps {
+    data: news | Tweet; // Allow either type
+}
+
+const Article = ({ data }: ArticleProps) => {
+    const isTweet = 'tweet' in data; // Check if the data is a tweet
+    let username = 'unknown'; // Default username
+    let name = 'Unknown User'; // Default name
+
+    if (isTweet) {
+        // Fetch the user data for the tweet
+        const user = getUserById(data.userId);
+        username = user ? user.username : 'unknown'; // Get username or fallback to 'unknown'
+        name = user ? user.name : 'Unknown User'; // Get name or fallback
+    } else {
+        username = data.author || 'unknown'; // For articles
+        name = data.author || 'Unknown User'; // Use author name for articles
+    }
+
     return (
         <div className="flex items-start p-4 border-b border-gray-800">
             <div className="flex-shrink-0">
                 <Image
                     src="/avatar.jpg"
-                    alt="avatar"
+                    alt={name}
                     width={50}
                     height={50}
                     className="w-10 h-10 rounded-full"
@@ -16,28 +36,30 @@ const Article = ({ data }: { data: news }) => {
             </div>
             <div className="flex-grow ml-2">
                 <p className="text-white">
-                    {data?.author || 'Unknown Author'}&nbsp;
-                    <span className="text-gray-500">@{data?.author || 'unknown'}</span>
+                    {name}
+                    <span className="text-gray-500">@{username}</span>
                 </p>
-                <div className="flex justify-end mt-2">
-                    <p className="text-gray-300">{data?.description || 'No description available.'}</p>
+                <div className="mt-2">
+                    <p className="text-gray-300">{isTweet ? data.tweet : data.title || ''}</p>
+                    <br />
+                    <p className="text-gray-300">{isTweet ? '' : data.description}</p>
                 </div>
                 <div className="flex items-center justify-start mt-4 gap-4 lg:gap-10 cursor-pointer text-sm lg:text-lg">
                     <span className="text-gray-500 flex items-center">
                         <FaRegComment className="text-gray-500 hover:text-white" />
-                        <span className="ml-1">123</span>
+                        <span className="ml-1">12</span>
                     </span>
                     <span className="text-gray-500 flex items-center">
                         <FaRetweet className="text-gray-500 hover:text-white" />
-                        <span className="ml-1">123</span>
+                        <span className="ml-1">31</span>
                     </span>
                     <span className="text-gray-500 flex items-center">
                         <FaRegHeart className="text-gray-500 hover:text-white" />
-                        <span className="ml-1">123</span>
+                        <span className="ml-1">41</span>
                     </span>
                     <span className="text-gray-500 flex items-center">
                         <FaChartBar className="text-gray-500 hover:text-white" />
-                        <span className="ml-1">123</span>
+                        <span className="ml-1">24</span>
                     </span>
                     <FaBookmark className="text-gray-500 hover:text-white" />
                     <FaShareAlt className="text-gray-500 hover:text-white" />
@@ -45,6 +67,6 @@ const Article = ({ data }: { data: news }) => {
             </div>
         </div>
     );
-}
+};
 
 export default Article;

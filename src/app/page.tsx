@@ -56,6 +56,7 @@ export default function Home() {
       const session = JSON.parse(localStorage.getItem("session") || "{}");
       document.cookie = `session=${JSON.stringify({ isLoggedIn: true, userId: session.userId })}; path=/;`;
       router.push('/home'); // redirect to home page
+      alert("Login successful!");
     } else {
       alert("Invalid email or password");
     }

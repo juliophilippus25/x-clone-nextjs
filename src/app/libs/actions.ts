@@ -1,6 +1,7 @@
 import { hashSync } from "bcrypt-ts";
 import { compare } from "bcrypt-ts";
 import { v4 as uuidv4 } from "uuid";
+import { Tweet } from "./data";
 
 // Register user
 export const registerUser = async (
@@ -53,4 +54,34 @@ export const loginUser = async (
   }
 
   return false; // Failed login
+};
+
+// post tweet
+export const postTweet = async (tweet: string) => {
+  const session = JSON.parse(localStorage.getItem("session") || "{}");
+  const userId = session.userId;
+
+  // Check if userId exists
+  if (!userId) {
+    throw new Error("User is not logged in.");
+  }
+
+  // Create a new tweet object
+  const newTweet = {
+    userId,
+    tweet,
+    createdAt: new Date().toISOString(), // Timestamp for when the tweet was created
+  };
+
+  // Get existing tweets from localStorage
+  const existingTweets = JSON.parse(localStorage.getItem("tweets") || "[]");
+
+  // Add the new tweet to the existing tweets
+  existingTweets.push(newTweet);
+
+  // Store the updated tweets in localStorage
+  localStorage.setItem("tweets", JSON.stringify(existingTweets));
+
+  // Return a success message (optional)
+  return "Tweet posted successfully!";
 };
