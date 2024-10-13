@@ -1,6 +1,6 @@
 import { news } from '@/app/types';
-import { getUserById } from '@/app/libs/data'; // Import the function to get user data
-import { Tweet } from '@/app/libs/data'; // Import both types
+import { getUserById } from '@/app/libs/data';
+import { Tweet } from '@/app/libs/data';
 import Image from 'next/image';
 import { FaRegComment, FaRetweet, FaRegHeart, FaChartBar, FaShareAlt, FaBookmark } from 'react-icons/fa';
 
@@ -12,12 +12,13 @@ const Article = ({ data }: ArticleProps) => {
     const isTweet = 'tweet' in data; // Check if the data is a tweet
     let username = 'unknown'; // Default username
     let name = 'Unknown User'; // Default name
+    let urlToImage = isTweet ? '' : data.urlToImage; // Set URL based on type
 
     if (isTweet) {
         // Fetch the user data for the tweet
         const user = getUserById(data.userId);
-        username = user ? user.username : 'unknown'; // Get username or fallback to 'unknown'
-        name = user ? user.name : 'Unknown User'; // Get name or fallback
+        username = user?.username || 'unknown'; // Get username or fallback to 'unknown'
+        name = user?.name || 'Unknown User'; // Get name or fallback
     } else {
         username = data.author || 'unknown'; // For articles
         name = data.author || 'Unknown User'; // Use author name for articles
@@ -44,6 +45,17 @@ const Article = ({ data }: ArticleProps) => {
                     <br />
                     <p className="text-gray-300">{isTweet ? '' : data.description}</p>
                 </div>
+                {urlToImage && (
+                    <div className='my-2'>
+                        <Image
+                            src={urlToImage}
+                            alt="image"
+                            width={150}
+                            height={150}
+                            className='w-full h-auto rounded-lg'
+                        />
+                    </div>
+                )}
                 <div className="flex items-center justify-start mt-4 gap-4 lg:gap-10 cursor-pointer text-sm lg:text-lg">
                     <span className="text-gray-500 flex items-center">
                         <FaRegComment className="text-gray-500 hover:text-white" />
