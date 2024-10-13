@@ -55,12 +55,11 @@ export default function HomePage() {
                     <div className="flex-grow ml-2">
                         <form onSubmit={handleSubmit}>
                             <textarea
-                                className="w-fullborder-none focus:outline-none rounded p-2 w-full"
+                                className="w-fullborder-none focus:outline-none rounded p-2 w-full bg-black"
                                 rows={4}
                                 value={tweet}
                                 onChange={(e) => setTweet(e.target.value)}
                                 placeholder="What is happening?!"
-                                style={{ backgroundColor: '#0a0a0a' }}
                             ></textarea>
                             <div className="border border-gray-800"></div>
                             <div className="flex justify-end mt-2">

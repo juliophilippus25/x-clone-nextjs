@@ -5,7 +5,7 @@ import Search from "../Search";
 export default function Trends() {
     return (
         <div className="hidden lg:block w-2/5 p-4 ml-4">
-            <Search />
+            <Search customClass="sticky h-auto top-0 w-full mb-4" />
             <div className="border border-gray-800 p-4 rounded-lg">
                 <h2 className="text-lg font-bold">Trends for you</h2>
                 <div className="py-2">

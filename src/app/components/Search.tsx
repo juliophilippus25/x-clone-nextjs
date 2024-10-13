@@ -1,12 +1,15 @@
 import { useState } from "react";
-import Button from "./Buttons";
 import { FaSearch } from "react-icons/fa";
 
-export default function Search() {
+interface SearchProps {
+    customClass?: string;
+}
+
+const Search: React.FC<SearchProps> = ({ customClass = "" }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
-        <div className="sticky border-gray-800 h-auto top-0 w-full mb-4">
+        <div className={`${customClass} border-gray-800`}>
             <form className="flex items-center">
                 <div className="flex items-center relative w-full">
                     <FaSearch
@@ -24,3 +27,5 @@ export default function Search() {
         </div>
     );
 }
+
+export default Search;

@@ -1,5 +1,3 @@
-// lib/data.tsx
-
 // user type
 export interface User {
     id: string;
