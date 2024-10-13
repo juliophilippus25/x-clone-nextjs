@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { useParams } from "next/navigation";
 import { MdOutlineDateRange } from "react-icons/md";
-import { getProfile } from "../lib/data";
+import { getProfile } from "../libs/data";
 import { MdVerified } from "react-icons/md";
 
 export default function ProfilePage() {
@@ -120,7 +120,7 @@ export default function ProfilePage() {
                     </nav>
                 </div>
 
-                <Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets />
+                <Tweets />
             </div>
 
             {/* Right column */}

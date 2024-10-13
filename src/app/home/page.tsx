@@ -9,7 +9,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
-
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const footer = document.getElementById('footer');
@@ -18,7 +17,6 @@ export default function HomePage() {
             }
         }
     })
-
     return (
         <main className="flex md:px-24 lg:px-32">
             {/* Left column */}
@@ -57,13 +55,11 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-
-                <Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets /><Tweets />
+                <Tweets />
             </div>
 
             {/* Right column */}
             <Trends />
         </main>
-
     )
-}   
+}

@@ -5,7 +5,7 @@ import Button from "@/app/components/Buttons";
 import Link from "next/link";
 import Line from "@/app/components/Line";
 import Logo from "@/app/components/Logo";
-import { loginUser, registerUser } from "./lib/actions";
+import { loginUser, registerUser } from "./libs/actions";
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 

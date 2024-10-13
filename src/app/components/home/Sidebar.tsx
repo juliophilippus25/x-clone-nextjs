@@ -5,7 +5,7 @@ import Link from "next/link";
 import { IoIosHome, IoIosSearch, IoIosNotifications, IoIosMail, IoIosBook, IoIosPeople, IoIosStar, IoIosCheckmarkCircle, IoIosMore, IoIosPerson, IoIosAdd } from "react-icons/io";
 import Button from "@/app/components/Buttons";
 import Image from "next/image";
-import { User, getUserById } from '@/app/lib/data';
+import { User, getUserById } from '@/app/libs/data';
 
 const navItems = [
     { label: "", href: "/home", icon: <Logo width={26} height={26} className="p-1" /> },
