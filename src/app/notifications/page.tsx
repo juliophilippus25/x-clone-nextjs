@@ -6,12 +6,12 @@ import { useEffect } from "react";
 import { CiSettings } from "react-icons/ci";
 import Navbar from "../components/home/Navbar";
 import Link from "next/link";
-import Search from "../components/Search";
 import RightColumn from "../components/RightColumn";
+import Search from "../components/Search";
 import WhoToFollow from "../components/home/WhoToFollow";
 import CenterColumn from "../components/CenterColumn";
 
-export default function ExplorePage() {
+export default function NotificationsPage() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -32,9 +32,9 @@ export default function ExplorePage() {
                 customClass="w-full md:w-3/4 lg:w-8/12 border border-gray-800"
             >
                 <Navbar>
-                    <div className="my-2 px-4">
+                    <div className="my-2 px-2">
                         <div className="flex items-center justify-between my-2">
-                            <Search customClass="w-10/12" />
+                            <h2 className="text-xl font-bold text-white p-4">Notifications</h2>
                             <Link href="/home" className="text-white font-bold rounded-full hover:bg-gray-900 p-2">
                                 <CiSettings className="text-2xl" />
                             </Link>
@@ -42,17 +42,12 @@ export default function ExplorePage() {
                     </div>
                     <div className="w-full">
                         <nav className="flex items-center justify-between">
-                            <Link href="#" className="text-white font-bold block w-full text-center hover:bg-gray-900 py-2">For you</Link>
-                            <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">Trending</Link>
-                            <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">News</Link>
-                            <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">Sports</Link>
-                            <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">Entertaiment</Link>
+                            <Link href="#" className="text-white font-bold block w-full text-center hover:bg-gray-900 py-2">All</Link>
+                            <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">Verified</Link>
+                            <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">Mentions</Link>
                         </nav>
                     </div>
                 </Navbar>
-                <div className="w-full">
-                    <Trends />
-                </div>
                 <Tweets />
             </CenterColumn>
 
@@ -60,6 +55,8 @@ export default function ExplorePage() {
             <RightColumn
                 customClass="w-2/5 p-4 border-r border-gray-800"
             >
+                <Search customClass="w-full mb-4" />
+                <Trends />
                 <WhoToFollow />
             </RightColumn>
         </main >

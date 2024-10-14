@@ -12,6 +12,8 @@ import { useParams } from "next/navigation";
 import { MdOutlineDateRange } from "react-icons/md";
 import { getProfile } from "../libs/data";
 import { MdVerified } from "react-icons/md";
+import RightColumn from "../components/RightColumn";
+import CenterColumn from "../components/CenterColumn";
 
 export default function ProfilePage() {
 
@@ -33,7 +35,9 @@ export default function ProfilePage() {
             <Sidebar />
 
             {/* Center column */}
-            <div className="w-full md:w-3/4 lg:w-8/12 border border-gray-800">
+            <CenterColumn
+                customClass="w-full md:w-3/4 lg:w-8/12 border border-gray-800"
+            >
                 <Navbar>
                     <div className="my-2 px-4">
                         <div className="flex items-center justify-start my-2">
@@ -53,7 +57,7 @@ export default function ProfilePage() {
                         alt="Avatar"
                         width={50}
                         height={50}
-                        className="w-full h-[150px] lg:h-[180px] object-cover rounded-t-lg"
+                        className="w-full h-[150px] lg:h-[180px] object-cover"
                     />
                     <div className="flex justify-between items-end h-16 relative">
                         <div className="relative -top-6 left-8 lg:top-0 lg:left-4 border-4 border-black rounded-full shadow-lg">
@@ -121,10 +125,14 @@ export default function ProfilePage() {
                 </div>
 
                 <Tweets />
-            </div>
+            </CenterColumn>
 
             {/* Right column */}
-            <Trends />
+            <RightColumn
+                customClass="w-2/5 p-4 border-r border-gray-800"
+            >
+                <Trends />
+            </RightColumn>
         </main >
 
     )

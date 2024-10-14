@@ -71,7 +71,7 @@ export default function Sidebar() {
     }, []);
 
     return (
-        <div className="w-2/8 sticky top-0 h-screen lg:w-4/12 p-2">
+        <div className="w-2/8 sticky top-0 h-screen lg:w-3/12 p-2">
             <ul className="h-full flex flex-col justify-between items-center lg:items-start">
                 {navItems.map((item) => (
                     <li key={item.label} className="flex hover:bg-gray-900 hover:rounded-full p-2 transition-all">

@@ -8,6 +8,10 @@ import Navbar from "../components/home/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { postTweet } from "../libs/actions";
+import RightColumn from "../components/RightColumn";
+import WhoToFollow from "../components/home/WhoToFollow";
+import Search from "../components/Search";
+import CenterColumn from "../components/CenterColumn";
 
 export default function HomePage() {
     useEffect(() => {
@@ -40,12 +44,14 @@ export default function HomePage() {
             <Sidebar />
 
             {/* Center column */}
-            <div className="w-full md:w-3/4 lg:w-8/12 border border-gray-800">
+            <CenterColumn
+                customClass="w-full md:w-3/4 lg:w-8/12 border border-gray-800"
+            >
                 <Navbar>
                     <h2 className="text-xl font-bold text-white p-4 md:hidden">Home</h2>
                     <nav className="flex items-center justify-between">
                         <Link href="#" className="text-white font-bold block w-full text-center hover:bg-gray-900 py-2">For you</Link>
-                        <Link href="#" className="text-white font-bold block w-full text-center hover:bg-gray-900 py-2">Following</Link>
+                        <Link href="#" className="text-gray-500 font-bold block w-full text-center hover:bg-gray-900 py-2">Following</Link>
                     </nav>
                 </Navbar>
                 <div className="p-4 rounded shadow mb-4 flex justify-center">
@@ -77,10 +83,16 @@ export default function HomePage() {
                     </div>
                 </div>
                 <Tweets />
-            </div>
+            </CenterColumn>
 
             {/* Right column */}
-            <Trends />
+            <RightColumn
+                customClass="w-2/5 p-4 border-r border-gray-800"
+            >
+                <Search customClass="mb-4" />
+                <Trends />
+                <WhoToFollow />
+            </RightColumn>
         </main>
     )
 }

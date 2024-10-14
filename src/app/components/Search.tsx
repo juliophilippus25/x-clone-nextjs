@@ -9,7 +9,7 @@ const Search: React.FC<SearchProps> = ({ customClass = "" }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
-        <div className={`${customClass} border-gray-800`}>
+        <div className={`${customClass} border-gray-800 sticky h-auto top-0`}>
             <form className="flex items-center">
                 <div className="flex items-center relative w-full">
                     <FaSearch

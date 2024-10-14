@@ -11,11 +11,10 @@ const fetcher = async () => {
 
 const Tweets = () => {
     // Get tweets from local storage
-    const tweets = getTweets(); // Fetch tweets from local storage
+    const tweets = getTweets();
 
     // Use SWR to fetch articles from the API
     const { data: articles, error: apiError } = useSWR('news', fetcher);
-    console.log(articles);
 
     return (
         <div className='w-full'>
@@ -33,19 +32,24 @@ const Tweets = () => {
             </div>
 
             {/* Loading state for articles */}
-            {!articles && <div>Loading more tweets...</div>}
+            {!articles && !apiError && <div>Loading more tweets, please wait...</div>}
+
+            {/* Error handling */}
+            {apiError && <div>Error loading tweets: {apiError.message}</div>}
 
             {/* Render API articles */}
             <div className='mt-4'>
-                {articles && articles.length > 0 ? (
-                    articles.map((article, idx) => (
-                        <div key={`article-${idx}`}>
-                            <Article data={article} />
-                        </div>
-                    ))
-                ) : (
-                    articles && <div>No articles found.</div>
-                )}
+                {articles ? (
+                    articles.length > 0 ? (
+                        articles.map((article, idx) => (
+                            <div key={`article-${idx}`}>
+                                <Article data={article} />
+                            </div>
+                        ))
+                    ) : (
+                        <div>No tweets found.</div>
+                    )
+                ) : null}
             </div>
         </div>
     );
