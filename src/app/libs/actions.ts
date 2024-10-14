@@ -1,7 +1,7 @@
 import { hashSync } from "bcrypt-ts";
 import { compare } from "bcrypt-ts";
 import { v4 as uuidv4 } from "uuid";
-import { Tweet } from "./data";
+import { getMessagesFromLocalStorage, Message, Tweet } from "./data";
 
 // Register user
 export const registerUser = async (
@@ -86,4 +86,10 @@ export const postTweet = async (tweet: string) => {
 
   // Return a success message (optional)
   return "Tweet posted successfully!";
+};
+
+export const saveMessageToLocalStorage = (message: Message) => {
+  const messages = getMessagesFromLocalStorage();
+  messages.push(message);
+  localStorage.setItem("messages", JSON.stringify(messages));
 };

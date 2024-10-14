@@ -19,12 +19,12 @@ import WhoToFollow from "../components/home/WhoToFollow";
 export default function ProfilePage() {
     const params = useParams();
     const profile = getProfile(params.profile);
-    const [tweets, setTweets] = useState<Tweet[]>([]); // State to hold tweets
+    const [tweets, setTweets] = useState<Tweet[]>([]);
 
     useEffect(() => {
         if (profile) {
-            const userTweets = getTweetsByUsername(profile.username); // Fetch tweets by username
-            setTweets(userTweets); // Set the fetched tweets
+            const userTweets = getTweetsByUsername(profile.username);
+            setTweets(userTweets);
         }
 
         if (typeof window !== 'undefined') {
@@ -36,7 +36,7 @@ export default function ProfilePage() {
     }, [profile]);
 
     if (!profile) {
-        return <div className="text-white">Profile not found</div>; // Handle undefined profile case
+        return <div className="text-white">Profile not found</div>;
     }
 
     return (
@@ -54,7 +54,7 @@ export default function ProfilePage() {
                             </Link>
                             <div className="ml-8">
                                 <h2 className="text-xl font-bold text-white">{profile?.username}</h2>
-                                <p className="text-sm text-gray-500">{tweets.length} posts</p> {/* Display number of posts */}
+                                <p className="text-sm text-gray-500">{tweets.length} posts</p>
                             </div>
                         </div>
                     </div>

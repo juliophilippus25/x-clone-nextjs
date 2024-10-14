@@ -370,7 +370,7 @@ export default function Home() {
                       hoverColor="hover:bg-gray-200"
                       customClass="px-5 py-2.5 w-full"
                     >
-                      Next
+                      Register
                     </Button>
 
                   </div>
@@ -442,7 +442,7 @@ export default function Home() {
                     hoverColor="hover:bg-gray-200"
                     customClass="px-5 py-2.5 w-full"
                   >
-                    Next
+                    Log in
                   </Button>
                 </form>
 

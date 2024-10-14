@@ -61,7 +61,7 @@ export default function HomePage() {
                     <div className="flex-grow ml-2">
                         <form onSubmit={handleSubmit}>
                             <textarea
-                                className="w-fullborder-none focus:outline-none rounded p-2 w-full bg-black"
+                                className="border-none focus:outline-none rounded p-2 w-full bg-black"
                                 rows={4}
                                 value={tweet}
                                 onChange={(e) => setTweet(e.target.value)}

@@ -15,6 +15,14 @@ export interface Tweet {
     createdAt: string;
 }
 
+export interface Message {
+    id: string;
+    senderId: string;
+    receiverId: string;
+    content: string;
+    timestamp: string;
+}
+
 // get all user
 export const getUsersFromLocalStorage = (): User[] => {
     const usersJson = localStorage.getItem("users");
@@ -54,4 +62,12 @@ export const getTweetsByUsername = (username: string): Tweet[] => {
 
     const tweets = getTweets();
     return tweets.filter(tweet => tweet.userId === user.id); // Filter tweets by userId
+};
+
+export const getMessagesFromLocalStorage = (): Message[] => {
+    const messagesJson = localStorage.getItem("messages");
+    if (messagesJson) {
+        return JSON.parse(messagesJson);
+    }
+    return [];
 };
