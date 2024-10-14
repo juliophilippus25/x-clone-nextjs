@@ -60,6 +60,7 @@ export const loginUser = async (
 export const postTweet = async (tweet: string) => {
   const session = JSON.parse(localStorage.getItem("session") || "{}");
   const userId = session.userId;
+  const id = uuidv4();
 
   // Check if userId exists
   if (!userId) {
@@ -68,6 +69,7 @@ export const postTweet = async (tweet: string) => {
 
   // Create a new tweet object
   const newTweet = {
+    id,
     userId,
     tweet,
     createdAt: new Date().toISOString(), // Timestamp for when the tweet was created
