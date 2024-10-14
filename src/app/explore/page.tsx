@@ -20,6 +20,8 @@ export default function ExplorePage() {
                 footer.style.display = 'none';
             }
         }
+
+        document.title = `Explore / X`;
     })
 
     return (

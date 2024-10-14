@@ -11,7 +11,9 @@ const fetcher = async () => {
 
 const Tweets = () => {
     // Get tweets from local storage
-    const tweets = getTweets();
+    const storedTweets = getTweets();
+    const tweets = storedTweets;
+    const sortedTweets = tweets.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     // Use SWR to fetch articles from the API
     const { data: articles, error: apiError } = useSWR('news', fetcher);
@@ -20,7 +22,7 @@ const Tweets = () => {
         <div className='w-full'>
             {/* Render local tweets first */}
             <div>
-                {tweets.length > 0 ? (
+                {sortedTweets.length > 0 ? (
                     tweets.map((tweet, idx) => (
                         <div key={`tweet-${idx}`}>
                             <Article data={tweet} />

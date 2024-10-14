@@ -40,6 +40,8 @@ export default function MessagesPage() {
             setUsers(getUsersFromLocalStorage());
             setMessages(getMessagesFromLocalStorage());
         }
+
+        document.title = `Messages / X`;
     }, []);
 
     const handleSendMessage = () => {
@@ -116,6 +118,15 @@ export default function MessagesPage() {
                                         </div>
                                     );
                                 })}
+
+                            {messages.filter(msg =>
+                                (msg.senderId === currentUser?.id && msg.receiverId === selectedUser.id) ||
+                                (msg.senderId === selectedUser.id && msg.receiverId === currentUser?.id)
+                            ).length === 0 && (
+                                    <div className="text-gray-500 text-center p-4">
+                                        There are no messages to display. Start a conversation with {selectedUser.name}.
+                                    </div>
+                                )}
                         </div>
                         <textarea
                             value={messageContent}
@@ -173,6 +184,15 @@ export default function MessagesPage() {
                                             </div>
                                         );
                                     })}
+
+                                {messages.filter(msg =>
+                                    (msg.senderId === currentUser?.id && msg.receiverId === selectedUser.id) ||
+                                    (msg.senderId === selectedUser.id && msg.receiverId === currentUser?.id)
+                                ).length === 0 && (
+                                        <div className="text-gray-500 text-center p-4">
+                                            There are no messages to display. Start a conversation with {selectedUser.name}.
+                                        </div>
+                                    )}
                             </div>
                             <textarea
                                 value={messageContent}

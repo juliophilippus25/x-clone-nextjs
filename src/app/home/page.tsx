@@ -21,6 +21,8 @@ export default function HomePage() {
                 footer.style.display = 'none';
             }
         }
+
+        document.title = `Home / X`;
     })
 
     const [tweet, setTweet] = useState('');

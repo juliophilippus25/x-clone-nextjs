@@ -20,6 +20,8 @@ export default function NotificationsPage() {
                 footer.style.display = 'none';
             }
         }
+
+        document.title = `Notifications / X`;
     })
 
     return (
