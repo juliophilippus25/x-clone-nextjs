@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Head from "next/head"; // Import Head untuk mengubah title
+import Head from "next/head";
 import Sidebar from "@/app/components/home/Sidebar";
 import Trends from "@/app/components/home/Trends";
 import Button from "../components/Buttons";
@@ -14,8 +14,9 @@ import { getProfile, getTweetsByUsername, Tweet, User } from "../libs/data";
 import { MdVerified } from "react-icons/md";
 import RightColumn from "../components/RightColumn";
 import CenterColumn from "../components/CenterColumn";
-import DetailTweet from "../components/DetailTweet";
 import WhoToFollow from "../components/home/WhoToFollow";
+import Article from "../components/home/Article"; // Ganti dengan komponen yang tepat
+import Tweets from "../components/home/Tweets";
 
 export default function ProfilePage() {
     const params = useParams();
@@ -25,21 +26,14 @@ export default function ProfilePage() {
     useEffect(() => {
         const fetchedProfile = getProfile(params.profile);
         setProfile(fetchedProfile || null);
+
+        if (fetchedProfile) {
+            const userTweets = getTweetsByUsername(fetchedProfile.username);
+            setTweets(userTweets);
+            document.title = `${fetchedProfile.name} (@${fetchedProfile.username}) / X`;
+        }
     }, [params.profile]);
 
-    useEffect(() => {
-        if (profile) {
-            const userTweets = getTweetsByUsername(profile.username);
-            setTweets(userTweets);
-        }
-    }, [profile]);
-
-    // Update the document title dynamically
-    useEffect(() => {
-        if (profile) {
-            document.title = `${profile.name} (@${profile.username}) / X`;
-        }
-    }, [profile]);
 
     if (!profile) {
         return <div className="text-white">Profile not found</div>;
@@ -146,9 +140,7 @@ export default function ProfilePage() {
                     {/* Display Tweets */}
                     <div className="mt-4">
                         {tweets.length > 0 ? (
-                            tweets.map(tweet => (
-                                <DetailTweet key={tweet.id} tweet={tweet} user={profile} />
-                            ))
+                            <Tweets tweets={tweets} user={profile} />
                         ) : (
                             <div className="text-gray-500 text-center p-4">
                                 {profile.name} has not posted any tweets yet.

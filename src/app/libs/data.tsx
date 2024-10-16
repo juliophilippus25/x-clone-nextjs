@@ -63,7 +63,15 @@ export const getTweetsByUsername = (username: string): Tweet[] => {
     const tweets = getTweets();
     return tweets.filter(tweet => tweet.userId === user.id); // Filter tweets by userId
 };
+export const getTweetsById = (id: string): Tweet[] => {
+    const user = getProfile(id);
+    if (!user) {
+        return []; // Return an empty array if user not found
+    }
 
+    const tweets = getTweets();
+    return tweets.filter(tweet => tweet.userId === user.id); // Filter tweets by userId
+};
 export const getMessagesFromLocalStorage = (): Message[] => {
     const messagesJson = localStorage.getItem("messages");
     if (messagesJson) {

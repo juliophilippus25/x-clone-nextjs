@@ -11,21 +11,20 @@ interface ArticleProps {
 
 const Article = ({ data }: ArticleProps) => {
     const isTweet = 'tweet' in data; // Check if the data is a tweet
-    let username = 'unknown'; // Default username
-    let createdAt = 'unknown'; // Default date
-    let name = 'Unknown User'; // Default name
-    let urlToImage = isTweet ? '' : data.urlToImage; // Set URL based on type
+    let displayUsername = 'unknown';
+    let createdAt = 'unknown';
+    let name = 'Unknown User';
 
+    // Fetch user data if it's a tweet
     if (isTweet) {
-        // Fetch the user data for the tweet
         const user = getUserById(data.userId);
-        username = user?.username || 'unknown'; // Get username or fallback to 'unknown'
-        name = user?.name || 'Unknown User'; // Get name or fallback
-        createdAt = data.createdAt || 'unknown'; // For tweets
+        displayUsername = user?.username || 'unknown';
+        name = user?.name || 'Unknown User';
+        createdAt = data.createdAt || 'unknown';
     } else {
-        username = data.author || 'unknown'; // For articles
-        createdAt = data.publishedAt || 'unknown'; // For articles
-        name = data.author || 'Unknown User'; // Use author name for articles
+        displayUsername = data.author || 'unknown';
+        createdAt = data.publishedAt || 'unknown';
+        name = data.author || 'Unknown User';
     }
 
     return (
@@ -42,18 +41,17 @@ const Article = ({ data }: ArticleProps) => {
             <div className="flex-grow ml-2">
                 <p className="text-white">
                     {name}&nbsp;
-                    <span className="text-gray-500">@{formatUsername(username)} | </span>
-                    <span className="text-gray-500">{diffForHuman(createdAt)}</span> {/* Use createdAt for tweets and publishedAt for articles */}
+                    <span className="text-gray-500">@{formatUsername(displayUsername)} | </span>
+                    <span className="text-gray-500">{diffForHuman(createdAt)}</span>
                 </p>
                 <div className="mt-2">
                     <p className="text-gray-300">{isTweet ? data.tweet : data.title || ''}</p>
-                    <br />
-                    <p className="text-gray-300">{isTweet ? '' : data.description}</p>
+                    {!isTweet && <p className="text-gray-300">{data.description}</p>}
                 </div>
-                {urlToImage && (
+                {isTweet ? null : data.urlToImage && (
                     <div className='my-2'>
                         <Image
-                            src={urlToImage}
+                            src={data.urlToImage}
                             alt="image"
                             width={150}
                             height={150}

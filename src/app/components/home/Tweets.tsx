@@ -1,58 +1,66 @@
 import useSWR from 'swr';
 import { getNewsTopHeadlines } from '@/app/api';
-import { getTweets } from '@/app/libs/data';
+import { Tweet, User } from '@/app/libs/data';
 import { removeDuplicateData } from '@/app/utils';
 import Article from './Article';
+
+interface TweetsProps {
+    tweets: Tweet[];
+    user?: User | null;
+}
 
 const fetcher = async () => {
     const newsTop = await getNewsTopHeadlines();
     return removeDuplicateData(newsTop);
 };
 
-const Tweets = () => {
-    // Get tweets from local storage
-    const storedTweets = getTweets();
-    const tweets = storedTweets;
-    const sortedTweets = tweets.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+const Tweets = ({ tweets, user }: TweetsProps) => {
+    const sortedTweets = Array.isArray(tweets)
+        ? tweets.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        : [];
 
     // Use SWR to fetch articles from the API
     const { data: articles, error: apiError } = useSWR('news', fetcher);
 
+    //local tweets
+    const renderTweets = () => {
+        if (sortedTweets.length === 0) {
+            return <div>No tweets found.</div>;
+        }
+        return sortedTweets.map((tweet) => (
+            <div key={tweet.id}>
+                <Article data={tweet} />
+            </div>
+        ));
+    };
+
+    const renderArticles = () => {
+        if (apiError) {
+            return <div>Error loading articles: {apiError.message}</div>;
+        }
+
+        if (!articles) {
+            return <div>Loading articles...</div>;
+        }
+
+        if (articles.length === 0) {
+            return <div>No articles found.</div>;
+        }
+
+        return articles.map((article) => (
+            <div key={article.id}> {/* Ensure the key is unique */}
+                <Article data={article} />
+            </div>
+        ));
+    };
+
     return (
         <div className='w-full'>
-            {/* Render local tweets first */}
-            <div>
-                {sortedTweets.length > 0 ? (
-                    tweets.map((tweet, idx) => (
-                        <div key={`tweet-${idx}`}>
-                            <Article data={tweet} />
-                        </div>
-                    ))
-                ) : (
-                    <div>No tweets found.</div>
-                )}
-            </div>
-
-            {/* Loading state for articles */}
-            {!articles && !apiError && <div>Loading more tweets, please wait...</div>}
-
-            {/* Error handling */}
-            {apiError && <div>Error loading tweets: {apiError.message}</div>}
+            {/* Render local tweets */}
+            <div>{renderTweets()}</div>
 
             {/* Render API articles */}
-            <div className='mt-4'>
-                {articles ? (
-                    articles.length > 0 ? (
-                        articles.map((article, idx) => (
-                            <div key={`article-${idx}`}>
-                                <Article data={article} />
-                            </div>
-                        ))
-                    ) : (
-                        <div>No tweets found.</div>
-                    )
-                ) : null}
-            </div>
+            <div>{renderArticles()}</div>
         </div>
     );
 };

@@ -2,7 +2,7 @@
 import Sidebar from "@/app/components/home/Sidebar";
 import Trends from "@/app/components/home/Trends";
 import Tweets from "@/app/components/home/Tweets";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CiSettings } from "react-icons/ci";
 import Navbar from "../components/home/Navbar";
 import Link from "next/link";
@@ -10,8 +10,10 @@ import Search from "../components/Search";
 import RightColumn from "../components/RightColumn";
 import WhoToFollow from "../components/home/WhoToFollow";
 import CenterColumn from "../components/CenterColumn";
+import { getTweets, Tweet } from "../libs/data";
 
 export default function ExplorePage() {
+    const [tweets, setTweets] = useState<Tweet[]>([]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -21,8 +23,11 @@ export default function ExplorePage() {
             }
         }
 
+        const tweets = getTweets();
+        setTweets(tweets);
+
         document.title = `Explore / X`;
-    })
+    }, []);
 
     return (
         <main className="flex md:px-24 lg:px-32">
@@ -55,7 +60,7 @@ export default function ExplorePage() {
                 <div className="w-full">
                     <Trends />
                 </div>
-                <Tweets />
+                <Tweets tweets={tweets} user={null} />
             </CenterColumn>
 
             {/* Right column */}

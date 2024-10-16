@@ -12,8 +12,12 @@ import RightColumn from "../components/RightColumn";
 import WhoToFollow from "../components/home/WhoToFollow";
 import Search from "../components/Search";
 import CenterColumn from "../components/CenterColumn";
+import { getTweets, getTweetsByUsername, getUserById, Tweet } from "../libs/data";
 
 export default function HomePage() {
+    const [tweet, setTweet] = useState('');
+    const [tweets, setTweets] = useState<Tweet[]>([]);
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const footer = document.getElementById('footer');
@@ -22,10 +26,12 @@ export default function HomePage() {
             }
         }
 
-        document.title = `Home / X`;
-    })
+        const tweets = getTweets();
+        setTweets(tweets);
 
-    const [tweet, setTweet] = useState('');
+        document.title = `Home / X`;
+    }, []);
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -84,7 +90,7 @@ export default function HomePage() {
                         </form>
                     </div>
                 </div>
-                <Tweets />
+                <Tweets tweets={tweets} user={null} />
             </CenterColumn>
 
             {/* Right column */}
