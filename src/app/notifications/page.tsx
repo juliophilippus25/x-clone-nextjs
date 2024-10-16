@@ -27,7 +27,7 @@ export default function NotificationsPage() {
         const tweets = getTweets();
         setTweets(tweets);
 
-        document.title = `Explore / X`;
+        document.title = `Notifications / X`;
     }, []);
 
     return (
@@ -56,7 +56,7 @@ export default function NotificationsPage() {
                         </nav>
                     </div>
                 </Navbar>
-                <Tweets tweets={tweets} user={null} />
+                <Tweets tweets={tweets} />
             </CenterColumn>
 
             {/* Right column */}

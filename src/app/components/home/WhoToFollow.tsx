@@ -1,22 +1,28 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Avatar from "../Avatar";
 import { getUsersFromLocalStorage } from '@/app/libs/data';
+import { User } from '@/app/libs/data'; // Adjust the import based on where your User type is defined
 
 export default function WhoToFollow() {
-    // Get session from cookie
-    const session = document.cookie.split('; ').find(row => row.startsWith('session='));
-    let loggedInUserId = null;
+    const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]); // Specify User[] type
 
-    if (session) {
-        const sessionData = JSON.parse(session.split('=')[1]);
-        loggedInUserId = sessionData.userId; // Get the logged-in user's ID
-    }
+    useEffect(() => {
+        // Get session from cookie
+        const session = document.cookie.split('; ').find(row => row.startsWith('session='));
+        if (session) {
+            const sessionData = JSON.parse(session.split('=')[1]);
+            setLoggedInUserId(sessionData.userId); // Set the logged-in user's ID
+        }
 
-    // Retrieve users from local storage
-    const users = getUsersFromLocalStorage();
+        // Retrieve users from local storage
+        const users = getUsersFromLocalStorage();
 
-    // Filter out the logged-in user from the list of users to display
-    const filteredUsers = users.filter(user => user.id !== loggedInUserId); // Assuming user has an `id` property
+        // Filter out the logged-in user from the list of users to display
+        const usersToFollow = users.filter(user => user.id !== loggedInUserId);
+        setFilteredUsers(usersToFollow);
+    }, [loggedInUserId]);
 
     return (
         <div className="border border-gray-800 p-4 rounded-lg">
@@ -34,5 +40,4 @@ export default function WhoToFollow() {
             </Link>
         </div>
     );
-
 }

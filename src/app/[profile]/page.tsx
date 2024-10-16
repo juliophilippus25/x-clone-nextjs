@@ -140,7 +140,7 @@ export default function ProfilePage() {
                     {/* Display Tweets */}
                     <div className="mt-4">
                         {tweets.length > 0 ? (
-                            <Tweets tweets={tweets} user={profile} />
+                            <Tweets tweets={tweets} />
                         ) : (
                             <div className="text-gray-500 text-center p-4">
                                 {profile.name} has not posted any tweets yet.

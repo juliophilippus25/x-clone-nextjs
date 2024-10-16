@@ -60,7 +60,7 @@ export default function ExplorePage() {
                 <div className="w-full">
                     <Trends />
                 </div>
-                <Tweets tweets={tweets} user={null} />
+                <Tweets tweets={tweets} />
             </CenterColumn>
 
             {/* Right column */}

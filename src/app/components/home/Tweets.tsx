@@ -6,7 +6,6 @@ import Article from './Article';
 
 interface TweetsProps {
     tweets: Tweet[];
-    user?: User | null;
 }
 
 const fetcher = async () => {
@@ -14,7 +13,7 @@ const fetcher = async () => {
     return removeDuplicateData(newsTop);
 };
 
-const Tweets = ({ tweets, user }: TweetsProps) => {
+const Tweets = ({ tweets }: TweetsProps) => {
     const sortedTweets = Array.isArray(tweets)
         ? tweets.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         : [];
@@ -47,8 +46,8 @@ const Tweets = ({ tweets, user }: TweetsProps) => {
             return <div>No articles found.</div>;
         }
 
-        return articles.map((article) => (
-            <div key={article.id}> {/* Ensure the key is unique */}
+        return articles.map((article, index) => (
+            <div key={`${article.id}-${index}`}>
                 <Article data={article} />
             </div>
         ));

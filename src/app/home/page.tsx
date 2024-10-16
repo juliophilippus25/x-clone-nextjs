@@ -90,7 +90,7 @@ export default function HomePage() {
                         </form>
                     </div>
                 </div>
-                <Tweets tweets={tweets} user={null} />
+                <Tweets tweets={tweets} />
             </CenterColumn>
 
             {/* Right column */}
